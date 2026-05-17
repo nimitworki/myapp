@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKX Design System v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Kanit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────
+   SKX DESIGN SYSTEM v3 — SKOOTAR DNA × MINIMAL TECHNOLOGY
+   More brand-forward than v2. Cyan lives, navy anchors.
+───────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces — pure white base, cyan-tinted gray scale */
+  --bg-0: #FFFFFF;
+  --bg-1: #F8FCFD;       /* very faint cyan wash */
+  --bg-2: #EEF8FA;       /* cyan-tinted panel */
+  --bg-3: #DDF2F6;       /* cyan-tinted separator */
+
+  /* Brand — Skootar Cyan exact */
+  --cyan:       #28C3E3;
+  --cyan-dark:  #1CAAC8;
+  --cyan-xdark: #147A93;
+  --cyan-light: #EBF9FC;
+  --cyan-mid:   #A8E5F3;
+
+  /* Navy — Skootar exact, structural anchor */
+  --navy:       #08085E;
+  --navy-mid:   #12126E;
+  --navy-soft:  #E8E8F7;
+  --navy-muted: #6A6AAA;
+
+  /* Coral — Skootar "k" mark accent */
+  --coral:      #F05A78;
+  --coral-dim:  #FEF0F3;
+
+  /* Neutrals — cyan-washed (not pure blue-gray) */
+  --n-900: #0A0F14;
+  --n-800: #14202A;
+  --n-700: #1E2E3A;
+  --n-600: #2E4050;
+  --n-500: #4A5E6E;
+  --n-400: #6B8090;
+  --n-300: #92A8B5;
+  --n-200: #C4D4DA;
+  --n-100: #E0EAED;
+  --n-50:  #F3F8FA;
+
+  /* Text */
+  --t-primary:   #0A0F14;
+  --t-secondary: #2E4050;
+  --t-muted:     #6B8090;
+  --t-disabled:  #92A8B5;
+  --t-brand:     #1CAAC8;
+  --t-navy:      #08085E;
+  --t-on-brand:  #FFFFFF;
+
+  /* Borders */
+  --b-subtle:  #D6EDF2;
+  --b-default: #B8D8E0;
+  --b-strong:  #8BBECB;
+  --b-brand:   #28C3E3;
+  --b-navy:    #08085E;
+
+  /* Semantic */
+  --s-success:    #0F7B45;
+  --s-success-bg: #D6F5E5;
+  --s-warning:    #8A6000;
+  --s-warning-bg: #FFF4C2;
+  --s-danger:     #C41E2A;
+  --s-danger-bg:  #FDECEA;
+  --s-info:       #0861C4;
+  --s-info-bg:    #DCF0FF;
+
+  /* Type */
+  --f-ui:   'Inter', -apple-system, system-ui, sans-serif;
+  --f-thai: 'Kanit', 'Inter', sans-serif;
+  --f-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Radius */
+  --r-2:  2px;
+  --r-4:  4px;
+  --r-6:  6px;
+  --r-8:  8px;
+  --r-12: 12px;
+  --r-16: 16px;
+
+  /* Shadow — cyan-tinted, subtle */
+  --sh-xs: 0 1px 2px rgba(8,135,160,0.06);
+  --sh-sm: 0 1px 4px rgba(8,135,160,0.08), 0 1px 2px rgba(8,135,160,0.04);
+  --sh-md: 0 4px 12px rgba(8,135,160,0.10), 0 1px 3px rgba(8,135,160,0.05);
+  --sh-brand: 0 0 0 3px rgba(40,195,227,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 14px; }
+body {
+  font-family: var(--f-ui);
+  background: var(--bg-1);
+  color: var(--t-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 220px;
+  height: 100vh;
+  background: var(--bg-0);
+  border-right: 1px solid var(--b-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--b-subtle);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cyan-light);
+}
+
+.logo-mark {
+  width: 28px; height: 28px;
+  background: var(--navy);
+  border-radius: var(--r-4);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 16px; height: 16px;
+  background: var(--cyan);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.logo-mark svg { width: 14px; height: 14px; position: relative; z-index: 1; }
+
+.sidebar-wordmark {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.4px;
+  line-height: 1;
+}
+.sidebar-wordmark .x { color: var(--coral); }
+
+.sidebar-ver {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  color: var(--t-disabled);
+  margin-top: 2px;
+  letter-spacing: 0.4px;
+}
+
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 10px 8px; }
+.nav-group { margin-bottom: 18px; }
+.nav-group-title {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--t-disabled);
+  padding: 0 8px 4px;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--t-secondary);
+  text-decoration: none;
+  padding: 5px 8px;
+  border-radius: var(--r-4);
+  transition: all 0.1s;
+}
+.nav-link:hover { background: var(--bg-2); color: var(--t-primary); }
+.nav-link.active {
+  background: var(--cyan);
+  color: #FFF;
+  font-weight: 500;
+}
+.nav-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+.nav-link.active .nav-dot { opacity: 0.7; background: #FFF; }
+
+/* ══════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════ */
+.main { margin-left: 220px; min-height: 100vh; }
+
+.topbar {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--b-subtle);
+  height: 48px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+.topbar-path { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--t-muted); }
+.topbar-sep { color: var(--b-default); }
+.topbar-page { color: var(--t-secondary); font-weight: 500; }
+.topbar-right { display: flex; gap: 8px; align-items: center; }
+.pill {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--cyan);
+  color: #FFF;
+  letter-spacing: 0.3px;
+}
+.pill.outline {
+  background: transparent;
+  color: var(--t-brand);
+  border: 1px solid var(--b-brand);
+}
+
+.content { padding: 52px 48px; max-width: 960px; }
+.section { margin-bottom: 80px; }
+
+.sec-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--cyan-dark);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.sec-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.sec-desc {
+  font-size: 13px;
+  color: var(--t-muted);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.divider { border: none; border-top: 1px solid var(--b-subtle); margin: 64px 0; }
+
+.sub-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--t-disabled);
+  margin-bottom: 10px;
+  margin-top: 28px;
+}
+.sub-label:first-child { margin-top: 0; }
+
+/* ══════════════════════════════
+   HERO BLOCK
+══════════════════════════════ */
+.hero {
+  background: var(--navy);
+  border-radius: var(--r-12);
+  padding: 52px 56px;
+  margin-bottom: 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(40,195,227,0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse, rgba(240,90,120,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0.85;
+}
+.hero-h1 {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: #FFF;
+  margin-bottom: 16px;
+}
+.hero-h1 span { color: var(--cyan); }
+.hero-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+.hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-badge {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: var(--r-4);
+  border: 1px solid rgba(40,195,227,0.25);
+  color: rgba(40,195,227,0.75);
+  letter-spacing: 0.4px;
+}
+.hero-ts {
+  position: absolute;
+  bottom: 18px; right: 24px;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.15);
+}
+
+/* ══════════════════════════════
+   DNA TABLE
+══════════════════════════════ */
+.dna-wrap {
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-8);
+  overflow: hidden;
+}
+.dna-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dna-table thead th {
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--t-disabled);
+  background: var(--n-50);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--b-subtle);
+  text-align: left;
+}
+.dna-table tbody td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--b-subtle);
+  vertical-align: middle;
+}
+.dna-table tbody tr:last-child td { border-bottom: none; }
+.dna-table tbody tr:hover td { background: var(--bg-1); }
+.sw-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.swatch-sm {
+  width: 22px; height: 22px;
+  border-radius: var(--r-4);
+  border: 1px solid rgba(0,0,0,0.07);
+  flex-shrink: 0;
+}
+.mono { font-family: var(--f-mono); font-size: 11px; color: var(--t-muted); }
+.tag-exact    { font-size: 10px; font-weight: 600; color: var(--s-success); background: var(--s-success-bg); padding: 2px 7px; border-radius: var(--r-2); }
+.tag-evolved  { font-size: 10px; font-weight: 600; color: var(--s-warning); background: var(--s-warning-bg); padding: 2px 7px; border-radius: var(--r-2); }
+.tag-new      { font-size: 10px; font-weight: 600; color: var(--s-info); background: var(--s-info-bg); padding: 2px 7px; border-radius: var(--r-2); }
+
+/* ══════════════════════════════
+   COLOR SWATCHES
+══════════════════════════════ */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.swatch-card {
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-8);
+  overflow: hidden;
+}
+.swatch-fill { height: 60px; }
+.swatch-body { padding: 8px 10px; background: var(--bg-0); }
+.swatch-name { font-size: 11px; font-weight: 600; color: var(--t-primary); }
+.swatch-hex  { font-family: var(--f-mono); font-size: 10px; color: var(--t-muted); margin-top: 1px; }
+.swatch-role { font-size: 10px; color: var(--t-disabled); margin-top: 1px; }
+
+/* neutral strip */
+.neutral-strip { display: grid; grid-template-columns: repeat(10, 1fr); border: 1px solid var(--b-subtle); border-radius: var(--r-8); overflow: hidden; }
+.ns-cell { height: 40px; }
+.ns-label { display: grid; grid-template-columns: repeat(10, 1fr); margin-top: 6px; }
+.ns-lbl { font-family: var(--f-mono); font-size: 9px; color: var(--t-disabled); text-align: center; }
+
+/* ══════════════════════════════
+   TYPOGRAPHY
+══════════════════════════════ */
+.type-scale { border-top: 1px solid var(--b-subtle); }
+.type-row {
+  display: grid;
+  grid-template-columns: 1fr 72px 72px 80px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--b-subtle);
+  align-items: center;
+  gap: 8px;
+}
+.type-row:last-child { border-bottom: none; }
+.type-meta { font-family: var(--f-mono); font-size: 10px; color: var(--t-muted); text-align: right; }
+
+.font-card {
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-8);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.font-card-header {
+  padding: 12px 16px;
+  background: var(--n-50);
+  border-bottom: 1px solid var(--b-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.font-card-name { font-size: 12px; font-weight: 600; color: var(--t-primary); }
+.font-card-role { font-family: var(--f-mono); font-size: 10px; color: var(--t-muted); }
+.font-card-body { padding: 20px 16px; }
+
+/* ══════════════════════════════
+   SPACING / RADIUS TOKENS
+══════════════════════════════ */
+.token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+.token-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-6);
+  background: var(--bg-0);
+}
+.token-vis { flex-shrink: 0; background: var(--cyan); height: 14px; }
+.token-name { font-family: var(--f-mono); font-size: 11px; color: var(--t-secondary); }
+.token-val  { font-family: var(--f-mono); font-size: 10px; color: var(--t-muted); margin-top: 1px; }
+
+.radius-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+.radius-card {
+  width: 80px;
+  padding: 12px;
+  border: 1px solid var(--b-subtle);
+  background: var(--bg-0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--r-4);
+}
+.radius-box {
+  width: 36px; height: 36px;
+  border: 2px solid var(--cyan);
+  background: var(--cyan-light);
+}
+.radius-val { font-family: var(--f-mono); font-size: 10px; color: var(--t-muted); text-align: center; }
+
+/* ══════════════════════════════
+   COMPONENTS — BUTTONS
+══════════════════════════════ */
+.c-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 14px;
+  font-family: var(--f-ui); font-size: 13px; font-weight: 500;
+  border-radius: var(--r-6); border: 1px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.12s;
+  text-decoration: none;
+}
+.btn-sm { height: 26px; padding: 0 10px; font-size: 12px; border-radius: var(--r-4); }
+.btn-lg { height: 40px; padding: 0 20px; font-size: 14px; font-weight: 600; border-radius: var(--r-8); }
+
+.btn-primary {
+  background: var(--cyan);
+  color: #FFF;
+  border-color: var(--cyan-dark);
+}
+.btn-primary:hover { background: var(--cyan-dark); border-color: var(--cyan-xdark); }
+
+.btn-navy {
+  background: var(--navy);
+  color: #FFF;
+  border-color: var(--navy-mid);
+}
+.btn-navy:hover { background: var(--navy-mid); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--t-brand);
+  border-color: var(--b-brand);
+}
+.btn-outline:hover { background: var(--cyan-light); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--t-secondary);
+  border-color: var(--b-default);
+}
+.btn-ghost:hover { background: var(--bg-2); color: var(--t-primary); }
+
+.btn-danger {
+  background: var(--s-danger);
+  color: #FFF;
+  border-color: var(--s-danger);
+}
+.btn-danger:hover { background: #A71820; }
+
+.btn:disabled, .btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════
+   LABELS / BADGES
+══════════════════════════════ */
+.label {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--r-2);
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+.label-brand   { background: var(--cyan); color: #FFF; }
+.label-navy    { background: var(--navy); color: #FFF; }
+.label-outline { background: transparent; color: var(--t-brand); border: 1px solid var(--b-brand); }
+.label-neutral { background: var(--n-100); color: var(--t-secondary); }
+.label-success { background: var(--s-success-bg); color: var(--s-success); }
+.label-warning { background: var(--s-warning-bg); color: var(--s-warning); }
+.label-danger  { background: var(--s-danger-bg); color: var(--s-danger); }
+.label-info    { background: var(--s-info-bg); color: var(--s-info); }
+
+/* ══════════════════════════════
+   FORM ELEMENTS
+══════════════════════════════ */
+.input {
+  height: 34px;
+  padding: 0 12px;
+  font-family: var(--f-ui); font-size: 13px;
+  border: 1px solid var(--b-default);
+  border-radius: var(--r-6);
+  background: var(--bg-0);
+  color: var(--t-primary);
+  outline: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  width: 220px;
+}
+.input:focus {
+  border-color: var(--cyan);
+  box-shadow: var(--sh-brand);
+}
+.input::placeholder { color: var(--t-disabled); }
+
+.select {
+  height: 34px;
+  padding: 0 32px 0 12px;
+  font-family: var(--f-ui); font-size: 13px;
+  border: 1px solid var(--b-default);
+  border-radius: var(--r-6);
+  background: var(--bg-0);
+  color: var(--t-primary);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B8090' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+}
+.select:focus { border-color: var(--cyan); box-shadow: var(--sh-brand); outline: none; }
+
+/* ══════════════════════════════
+   KPI STRIP
+══════════════════════════════ */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-8);
+  background: var(--bg-0);
+  overflow: hidden;
+}
+.kpi-cell {
+  padding: 20px 22px;
+  border-right: 1px solid var(--b-subtle);
+  position: relative;
+}
+.kpi-cell:last-child { border-right: none; }
+.kpi-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: transparent;
+}
+.kpi-cell.accent-brand::before { background: var(--cyan); }
+.kpi-cell.accent-navy::before  { background: var(--navy); }
+.kpi-cell.accent-coral::before { background: var(--coral); }
+.kpi-cell.accent-ok::before    { background: var(--s-success); }
+
+.kpi-label { font-size: 11px; color: var(--t-muted); margin-bottom: 6px; letter-spacing: 0.2px; }
+.kpi-value {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--navy);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-value.mono { font-family: var(--f-mono); font-size: 22px; letter-spacing: -0.5px; }
+.kpi-delta {
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+.kpi-delta.up   { color: var(--s-success); }
+.kpi-delta.down { color: var(--s-danger); }
+
+/* ══════════════════════════════
+   ALERTS
+══════════════════════════════ */
+.alert {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--r-6);
+  border: 1px solid transparent;
+  font-size: 13px;
+  margin-bottom: 8px;
+  border-left-width: 3px;
+}
+.alert-icon { font-size: 14px; line-height: 1.4; flex-shrink: 0; font-family: var(--f-mono); font-weight: 700; width: 16px; }
+.alert-title { font-weight: 600; margin-bottom: 2px; font-size: 13px; }
+.alert-body  { font-size: 12px; line-height: 1.6; opacity: 0.8; }
+
+.alert-info    { background: var(--s-info-bg);    border-color: var(--s-info);    color: var(--s-info); border-left-color: var(--s-info); }
+.alert-success { background: var(--s-success-bg); border-color: var(--s-success); color: var(--s-success); border-left-color: var(--s-success); }
+.alert-warning { background: var(--s-warning-bg); border-color: var(--s-warning); color: var(--s-warning); border-left-color: var(--s-warning); }
+.alert-danger  { background: var(--s-danger-bg);  border-color: var(--s-danger);  color: var(--s-danger); border-left-color: var(--s-danger); }
+
+/* ══════════════════════════════
+   PROGRESS
+══════════════════════════════ */
+.progress-wrap { margin-bottom: 12px; }
+.progress-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.progress-name { font-size: 12px; color: var(--t-secondary); }
+.progress-pct  { font-family: var(--f-mono); font-size: 11px; color: var(--t-muted); }
+.progress-track {
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--cyan);
+}
+.progress-fill.navy  { background: var(--navy); }
+.progress-fill.coral { background: var(--coral); }
+
+/* ══════════════════════════════
+   SEGMENTED CONTROL
+══════════════════════════════ */
+.seg-ctrl {
+  display: inline-flex;
+  background: var(--bg-2);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-6);
+  padding: 3px;
+  gap: 2px;
+}
+.seg-btn {
+  height: 26px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: var(--r-4);
+  border: none;
+  background: transparent;
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.seg-btn.active {
+  background: var(--bg-0);
+  color: var(--navy);
+  box-shadow: var(--sh-xs);
+}
+.seg-btn:hover:not(.active) { color: var(--t-secondary); }
+
+/* ══════════════════════════════
+   CODE BLOCK
+══════════════════════════════ */
+.code-block {
+  background: var(--navy);
+  border-radius: var(--r-8);
+  overflow: hidden;
+  border: 1px solid rgba(40,195,227,0.15);
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.code-lang {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 0.5px;
+}
+.code-dots { display: flex; gap: 5px; }
+.code-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+}
+pre.code {
+  padding: 20px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  overflow-x: auto;
+}
+.c-prop  { color: #79C0FF; }
+.c-val   { color: #A5D6FF; }
+.c-brand { color: var(--cyan); }
+.c-navy  { color: #8899DD; }
+.c-coral { color: #FFA07A; }
+.c-cmt   { color: rgba(255,255,255,0.25); font-style: italic; }
+.c-str   { color: #AECE91; }
+
+/* ══════════════════════════════
+   APP SHELL PREVIEW
+══════════════════════════════ */
+.shell-preview {
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-12);
+  overflow: hidden;
+  box-shadow: var(--sh-md);
+  height: 400px;
+  display: grid;
+  grid-template-rows: 44px 1fr;
+}
+.shell-topbar {
+  background: var(--bg-0);
+  border-bottom: 1px solid var(--b-subtle);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+.shell-dots { display: flex; gap: 5px; }
+.shell-dot { width: 10px; height: 10px; border-radius: 50%; }
+.sd-r { background: #FF5F57; }
+.sd-y { background: #FFBD2E; }
+.sd-g { background: #28C840; }
+.shell-addr {
+  flex: 1;
+  height: 24px;
+  background: var(--bg-2);
+  border-radius: var(--r-4);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--t-muted);
+  max-width: 300px;
+  margin: 0 auto;
+}
+.shell-body { display: grid; grid-template-columns: 200px 1fr; }
+.shell-sb {
+  background: var(--bg-0);
+  border-right: 1px solid var(--b-subtle);
+  padding: 12px 8px;
+}
+.shell-sb-hd {
+  font-size: 11px; font-weight: 700;
+  color: var(--navy);
+  padding: 6px 8px 10px;
+  border-bottom: 1px solid var(--b-subtle);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.shell-sb-hd-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+.shell-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  padding: 5px 8px;
+  border-radius: var(--r-4);
+  color: var(--t-secondary);
+  margin-bottom: 2px;
+}
+.shell-item.active { background: var(--cyan); color: #FFF; }
+.shell-item-icon {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+.shell-item.active .shell-item-icon { background: #FFF; opacity: 0.4; }
+.shell-content { padding: 20px; background: var(--bg-1); overflow: hidden; }
+.shell-toprow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.shell-page-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.shell-kpi-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.skm {
+  background: var(--bg-0);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-6);
+  padding: 10px 12px;
+  border-top: 2px solid var(--cyan);
+}
+.skm-l { font-size: 9px; color: var(--t-muted); margin-bottom: 3px; }
+.skm-v { font-size: 16px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+.shell-table-mock {
+  background: var(--bg-0);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-6);
+  overflow: hidden;
+}
+.stm-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 80px;
+  gap: 8px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--b-subtle);
+  font-size: 10px;
+}
+.stm-row:last-child { border-bottom: none; }
+.stm-row.header { font-weight: 600; color: var(--t-muted); background: var(--n-50); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+.stm-cell { color: var(--t-secondary); }
+.stm-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: var(--r-2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-mark">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="7" r="4.5" stroke="white" stroke-width="1.5"/>
+        <circle cx="7" cy="7" r="1.5" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <div class="sidebar-wordmark">SK<span class="x">X</span></div>
+      <div class="sidebar-ver">Design System v3</div>
+    </div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-group">
+      <div class="nav-group-title">Foundation</div>
+      <a href="#origins" class="nav-link active"><span class="nav-dot"></span>Brand Origins</a>
+      <a href="#colors" class="nav-link"><span class="nav-dot"></span>Color System</a>
+      <a href="#type" class="nav-link"><span class="nav-dot"></span>Typography</a>
+      <a href="#space" class="nav-link"><span class="nav-dot"></span>Space & Radius</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Components</div>
+      <a href="#buttons" class="nav-link"><span class="nav-dot"></span>Buttons</a>
+      <a href="#labels" class="nav-link"><span class="nav-dot"></span>Labels & Badges</a>
+      <a href="#inputs" class="nav-link"><span class="nav-dot"></span>Inputs</a>
+      <a href="#data" class="nav-link"><span class="nav-dot"></span>Data Display</a>
+      <a href="#alerts" class="nav-link"><span class="nav-dot"></span>Alerts</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Patterns</div>
+      <a href="#shell" class="nav-link"><span class="nav-dot"></span>App Shell</a>
+      <a href="#tokens" class="nav-link"><span class="nav-dot"></span>Token Reference</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-path">
+      <span>SKX</span>
+      <span class="topbar-sep">/</span>
+      <span class="topbar-page">Design System</span>
+      <span class="topbar-sep">/</span>
+      <span>v3</span>
+    </div>
+    <div class="topbar-right">
+      <span class="pill outline">Skootar DNA</span>
+      <span class="pill">Minimal Tech</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">SKX · Design System v3</div>
+      <h1 class="hero-h1">Built on<br><span>Skootar.</span><br>Made for scale.</h1>
+      <p class="hero-sub">Minimal, technology-forward UI language that carries every brand token from skootar.com — evolved for software precision, not diluted from it.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">Cyan #28C3E3 exact</span>
+        <span class="hero-badge">Navy #08085E exact</span>
+        <span class="hero-badge">Inter + Kanit + JetBrains Mono</span>
+        <span class="hero-badge">Minimal shadows</span>
+      </div>
+      <div class="hero-ts">SKX_DS_v3 · 2026 · Light Mode</div>
+    </div>
+
+    <!-- ── SECTION 1: ORIGINS ── -->
+    <section class="section" id="origins">
+      <div class="sec-eyebrow">01 / Brand Origins</div>
+      <h2 class="sec-title">Skootar DNA</h2>
+      <p class="sec-desc">Every token traces back to skootar.com. The table below shows the lineage — what was kept exact, what was evolved for software contexts, and what is new to SKX.</p>
+
+      <div class="dna-wrap">
+        <table class="dna-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Skootar.com Origin</th>
+              <th>SKX Value</th>
+              <th>Change</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>--cyan</strong></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#28C3E3"></div><span class="mono">#28C3E3</span></div></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#28C3E3"></div><span class="mono">#28C3E3</span></div></td>
+              <td><span class="tag-exact">Exact</span></td>
+              <td>Primary brand, CTA</td>
+            </tr>
+            <tr>
+              <td><strong>--navy</strong></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#08085E"></div><span class="mono">#08085E</span></div></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#08085E"></div><span class="mono">#08085E</span></div></td>
+              <td><span class="tag-exact">Exact</span></td>
+              <td>Headings, sidebar, hero bg</td>
+            </tr>
+            <tr>
+              <td><strong>--coral</strong></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#F05A78"></div><span class="mono">#F05A78</span></div></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#F05A78"></div><span class="mono">#F05A78</span></div></td>
+              <td><span class="tag-exact">Exact</span></td>
+              <td>"X" mark, accent, alerts</td>
+            </tr>
+            <tr>
+              <td><strong>--green</strong></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#56D84A"></div><span class="mono">#56D84A</span></div></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#0F7B45"></div><span class="mono">#0F7B45</span></div></td>
+              <td><span class="tag-evolved">Evolved</span></td>
+              <td>Success state — WCAG AA on white</td>
+            </tr>
+            <tr>
+              <td><strong>--bg-1</strong></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#ECFEFF;border:1px solid #ddd"></div><span class="mono">Light Cyan bg</span></div></td>
+              <td><div class="sw-inline"><div class="swatch-sm" style="background:#F8FCFD;border:1px solid #ddd"></div><span class="mono">#F8FCFD</span></div></td>
+              <td><span class="tag-evolved">Evolved</span></td>
+              <td>Page background — subtler wash</td>
+            </tr>
+            <tr>
+              <td><strong>--f-thai</strong></td>
+              <td><div class="sw-inline"><span class="mono">Kanit, db_heavent</span></div></td>
+              <td><div class="sw-inline"><span class="mono">Kanit, Inter</span></div></td>
+              <td><span class="tag-evolved">Evolved</span></td>
+              <td>Kanit retained, db_heavent dropped</td>
+            </tr>
+            <tr>
+              <td><strong>--f-mono</strong></td>
+              <td><div class="sw-inline"><span class="mono">—</span></div></td>
+              <td><div class="sw-inline"><span class="mono">JetBrains Mono</span></div></td>
+              <td><span class="tag-new">New</span></td>
+              <td>Data, code, metrics, tokens</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 2: COLORS ── -->
+    <section class="section" id="colors">
+      <div class="sec-eyebrow">02 / Color System</div>
+      <h2 class="sec-title">Color Palette</h2>
+      <p class="sec-desc">Cyan and Navy are the two structural brand colors. All neutrals carry a subtle cyan wash to maintain brand coherence without overuse of chroma.</p>
+
+      <div class="sub-label">Brand</div>
+      <div class="swatch-grid">
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#28C3E3"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Cyan</div>
+            <div class="swatch-hex">#28C3E3</div>
+            <div class="swatch-role">Primary brand</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#1CAAC8"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Cyan Dark</div>
+            <div class="swatch-hex">#1CAAC8</div>
+            <div class="swatch-role">Hover / active</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#EBF9FC;border:1px solid #D6EDF2"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Cyan Light</div>
+            <div class="swatch-hex">#EBF9FC</div>
+            <div class="swatch-role">Tint / dim bg</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#08085E"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Navy</div>
+            <div class="swatch-hex">#08085E</div>
+            <div class="swatch-role">Headlines / anchor</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#E8E8F7;border:1px solid #D6EDF2"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Navy Soft</div>
+            <div class="swatch-hex">#E8E8F7</div>
+            <div class="swatch-role">Navy tint bg</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-fill" style="background:#F05A78"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Coral</div>
+            <div class="swatch-hex">#F05A78</div>
+            <div class="swatch-role">Accent / "X" mark</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-label">Surfaces</div>
+      <div class="swatch-grid">
+        <div class="swatch-card"><div class="swatch-fill" style="background:#FFFFFF;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">bg-0</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">Cards, modals</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#F8FCFD;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">bg-1</div><div class="swatch-hex">#F8FCFD</div><div class="swatch-role">Page base</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#EEF8FA;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">bg-2</div><div class="swatch-hex">#EEF8FA</div><div class="swatch-role">Panels, sidebar</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#DDF2F6;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">bg-3</div><div class="swatch-hex">#DDF2F6</div><div class="swatch-role">Hover, dividers</div></div></div>
+      </div>
+
+      <div class="sub-label">Neutrals — Cyan-washed gray scale</div>
+      <div class="neutral-strip">
+        <div class="ns-cell" style="background:#0A0F14"></div>
+        <div class="ns-cell" style="background:#14202A"></div>
+        <div class="ns-cell" style="background:#1E2E3A"></div>
+        <div class="ns-cell" style="background:#2E4050"></div>
+        <div class="ns-cell" style="background:#4A5E6E"></div>
+        <div class="ns-cell" style="background:#6B8090"></div>
+        <div class="ns-cell" style="background:#92A8B5"></div>
+        <div class="ns-cell" style="background:#C4D4DA"></div>
+        <div class="ns-cell" style="background:#E0EAED"></div>
+        <div class="ns-cell" style="background:#F3F8FA;border-left:1px solid #E0EAED"></div>
+      </div>
+      <div class="ns-label" style="margin-bottom:24px">
+        <div class="ns-lbl">900</div><div class="ns-lbl">800</div><div class="ns-lbl">700</div>
+        <div class="ns-lbl">600</div><div class="ns-lbl">500</div><div class="ns-lbl">400</div>
+        <div class="ns-lbl">300</div><div class="ns-lbl">200</div><div class="ns-lbl">100</div>
+        <div class="ns-lbl">50</div>
+      </div>
+
+      <div class="sub-label">Semantic</div>
+      <div class="swatch-grid">
+        <div class="swatch-card"><div class="swatch-fill" style="background:#0F7B45"></div><div class="swatch-body"><div class="swatch-name">Success</div><div class="swatch-hex">#0F7B45</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#D6F5E5;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">Success bg</div><div class="swatch-hex">#D6F5E5</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#8A6000"></div><div class="swatch-body"><div class="swatch-name">Warning</div><div class="swatch-hex">#8A6000</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#FFF4C2;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">Warning bg</div><div class="swatch-hex">#FFF4C2</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#C41E2A"></div><div class="swatch-body"><div class="swatch-name">Danger</div><div class="swatch-hex">#C41E2A</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#FDECEA;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">Danger bg</div><div class="swatch-hex">#FDECEA</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#0861C4"></div><div class="swatch-body"><div class="swatch-name">Info</div><div class="swatch-hex">#0861C4</div></div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:#DCF0FF;border:1px solid #E0EAED"></div><div class="swatch-body"><div class="swatch-name">Info bg</div><div class="swatch-hex">#DCF0FF</div></div></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 3: TYPOGRAPHY ── -->
+    <section class="section" id="type">
+      <div class="sec-eyebrow">03 / Typography</div>
+      <h2 class="sec-title">Type System</h2>
+      <p class="sec-desc">Three typefaces, three distinct roles. Inter handles UI precision. Kanit carries Thai language and brand warmth. JetBrains Mono signals data and technical context.</p>
+
+      <div class="font-card">
+        <div class="font-card-header">
+          <span class="font-card-name">Inter</span>
+          <span class="font-card-role">--f-ui · Primary UI font</span>
+        </div>
+        <div class="font-card-body">
+          <div class="type-scale">
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:36px;font-weight:800;letter-spacing:-1.5px;color:#08085E">Display</div>
+              <div class="type-meta">36px</div>
+              <div class="type-meta">800</div>
+              <div class="type-meta">−1.5px</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:24px;font-weight:700;letter-spacing:-0.5px;color:#08085E">Heading 1</div>
+              <div class="type-meta">24px</div>
+              <div class="type-meta">700</div>
+              <div class="type-meta">−0.5px</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:18px;font-weight:600;color:#08085E">Heading 2</div>
+              <div class="type-meta">18px</div>
+              <div class="type-meta">600</div>
+              <div class="type-meta">0</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:14px;font-weight:500;color:#2E4050">Body Large</div>
+              <div class="type-meta">14px</div>
+              <div class="type-meta">500</div>
+              <div class="type-meta">0</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:13px;font-weight:400;color:#2E4050">Body · Default UI text at 13px with 1.5 line height</div>
+              <div class="type-meta">13px</div>
+              <div class="type-meta">400</div>
+              <div class="type-meta">0</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Inter';font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:#6B8090">LABEL / OVERLINE</div>
+              <div class="type-meta">11px</div>
+              <div class="type-meta">600</div>
+              <div class="type-meta">0.7px</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-card-header">
+          <span class="font-card-name">Kanit</span>
+          <span class="font-card-role">--f-thai · Thai language + brand headlines</span>
+        </div>
+        <div class="font-card-body">
+          <div class="type-scale">
+            <div class="type-row">
+              <div style="font-family:'Kanit';font-size:32px;font-weight:700;color:#08085E">สกู๊ตตาร์ เทคโนโลยี</div>
+              <div class="type-meta">32px</div>
+              <div class="type-meta">700</div>
+              <div class="type-meta">−1px</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Kanit';font-size:18px;font-weight:600;color:#2E4050">ระบบจัดการงานขนส่ง</div>
+              <div class="type-meta">18px</div>
+              <div class="type-meta">600</div>
+              <div class="type-meta">0</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'Kanit';font-size:14px;font-weight:400;color:#4A5E6E">ข้อความในระบบและ UI ภาษาไทย ใช้ Kanit น้ำหนัก 400</div>
+              <div class="type-meta">14px</div>
+              <div class="type-meta">400</div>
+              <div class="type-meta">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="font-card-header">
+          <span class="font-card-name">JetBrains Mono</span>
+          <span class="font-card-role">--f-mono · Data, metrics, code, tokens</span>
+        </div>
+        <div class="font-card-body">
+          <div class="type-scale">
+            <div class="type-row">
+              <div style="font-family:'JetBrains Mono';font-size:26px;font-weight:600;color:#08085E;letter-spacing:-0.5px">1,284,750</div>
+              <div class="type-meta">26px</div>
+              <div class="type-meta">600</div>
+              <div class="type-meta">tabular</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'JetBrains Mono';font-size:13px;font-weight:400;color:#28C3E3">--cyan: #28C3E3</div>
+              <div class="type-meta">13px</div>
+              <div class="type-meta">400</div>
+              <div class="type-meta">tokens</div>
+            </div>
+            <div class="type-row">
+              <div style="font-family:'JetBrains Mono';font-size:11px;font-weight:500;color:#6B8090">v3.0.0 · build/2026.04.24 · 312ms</div>
+              <div class="type-meta">11px</div>
+              <div class="type-meta">500</div>
+              <div class="type-meta">meta</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 4: SPACE & RADIUS ── -->
+    <section class="section" id="space">
+      <div class="sec-eyebrow">04 / Space & Radius</div>
+      <h2 class="sec-title">Spacing & Corners</h2>
+      <p class="sec-desc">4px base grid. Radius tokens range from 2px (inline labels) to 16px (large surfaces). Avoid mixing radius scales within the same component.</p>
+
+      <div class="sub-label">Spacing tokens (4px grid)</div>
+      <div class="token-grid">
+        <div class="token-row"><div class="token-vis" style="width:4px"></div><div><div class="token-name">--sp-1</div><div class="token-val">4px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:8px"></div><div><div class="token-name">--sp-2</div><div class="token-val">8px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:12px"></div><div><div class="token-name">--sp-3</div><div class="token-val">12px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:16px"></div><div><div class="token-name">--sp-4</div><div class="token-val">16px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:20px"></div><div><div class="token-name">--sp-5</div><div class="token-val">20px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:24px"></div><div><div class="token-name">--sp-6</div><div class="token-val">24px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:32px"></div><div><div class="token-name">--sp-8</div><div class="token-val">32px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:40px"></div><div><div class="token-name">--sp-10</div><div class="token-val">40px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:48px"></div><div><div class="token-name">--sp-12</div><div class="token-val">48px</div></div></div>
+        <div class="token-row"><div class="token-vis" style="width:64px"></div><div><div class="token-name">--sp-16</div><div class="token-val">64px</div></div></div>
+      </div>
+
+      <div class="sub-label" style="margin-top:28px">Radius scale</div>
+      <div class="radius-grid">
+        <div class="radius-card"><div class="radius-box" style="border-radius:2px"></div><div class="radius-val">--r-2<br>2px<br>Labels</div></div>
+        <div class="radius-card"><div class="radius-box" style="border-radius:4px"></div><div class="radius-val">--r-4<br>4px<br>Tags</div></div>
+        <div class="radius-card"><div class="radius-box" style="border-radius:6px"></div><div class="radius-val">--r-6<br>6px<br>Buttons</div></div>
+        <div class="radius-card"><div class="radius-box" style="border-radius:8px"></div><div class="radius-val">--r-8<br>8px<br>Cards</div></div>
+        <div class="radius-card"><div class="radius-box" style="border-radius:12px"></div><div class="radius-val">--r-12<br>12px<br>Panels</div></div>
+        <div class="radius-card"><div class="radius-box" style="border-radius:16px"></div><div class="radius-val">--r-16<br>16px<br>Modals</div></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 5: BUTTONS ── -->
+    <section class="section" id="buttons">
+      <div class="sec-eyebrow">05 / Components</div>
+      <h2 class="sec-title">Buttons</h2>
+      <p class="sec-desc">Three fixed heights: 26px small, 32px default, 40px large. Cyan is the primary action color — not muted, not secondary. Navy for destructive-adjacent or high-authority actions.</p>
+
+      <div class="sub-label">Variants — default (32px)</div>
+      <div class="c-row">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-navy">Navy</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+
+      <div class="sub-label">Sizes</div>
+      <div class="c-row" style="align-items:flex-end">
+        <button class="btn btn-primary btn-sm">Small (26px)</button>
+        <button class="btn btn-primary">Default (32px)</button>
+        <button class="btn btn-primary btn-lg">Large (40px)</button>
+      </div>
+
+      <div class="sub-label">With segmented control</div>
+      <div class="c-row">
+        <div class="seg-ctrl">
+          <button class="seg-btn active">All</button>
+          <button class="seg-btn">Active</button>
+          <button class="seg-btn">Completed</button>
+          <button class="seg-btn">Archived</button>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 6: LABELS ── -->
+    <section class="section" id="labels">
+      <div class="sec-eyebrow">06 / Labels & Badges</div>
+      <h2 class="sec-title">Labels</h2>
+      <p class="sec-desc">20px height, 2px radius — compact, readable, inline. Cyan-filled label is the primary status indicator. Outline for secondary or selectable states.</p>
+
+      <div class="sub-label">Brand labels</div>
+      <div class="c-row">
+        <span class="label label-brand">Active</span>
+        <span class="label label-navy">Verified</span>
+        <span class="label label-outline">Draft</span>
+        <span class="label label-neutral">Archived</span>
+      </div>
+
+      <div class="sub-label">Semantic labels</div>
+      <div class="c-row">
+        <span class="label label-success">Delivered</span>
+        <span class="label label-warning">Pending</span>
+        <span class="label label-danger">Failed</span>
+        <span class="label label-info">In transit</span>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 7: INPUTS ── -->
+    <section class="section" id="inputs">
+      <div class="sec-eyebrow">07 / Form Inputs</div>
+      <h2 class="sec-title">Inputs & Selects</h2>
+      <p class="sec-desc">34px height, 6px radius. Focus state uses cyan ring — 3px rgba(28, 195, 227, 0.18) — visible and on-brand without being harsh.</p>
+
+      <div class="sub-label">Text input</div>
+      <div class="c-row">
+        <input class="input" type="text" placeholder="Search deliveries...">
+        <input class="input" type="text" placeholder="Driver ID" style="font-family:var(--f-mono);font-size:12px">
+      </div>
+
+      <div class="sub-label">Select</div>
+      <div class="c-row">
+        <select class="select">
+          <option>All regions</option>
+          <option>Bangkok</option>
+          <option>Chiang Mai</option>
+          <option>Phuket</option>
+        </select>
+        <select class="select">
+          <option>Today</option>
+          <option>This week</option>
+          <option>This month</option>
+        </select>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 8: DATA DISPLAY ── -->
+    <section class="section" id="data">
+      <div class="sec-eyebrow">08 / Data Display</div>
+      <h2 class="sec-title">KPI Strip & Progress</h2>
+      <p class="sec-desc">KPI strip uses 3px top-accent to encode category without relying on background color. Progress track is 4px — minimal but readable.</p>
+
+      <div class="sub-label">KPI Strip</div>
+      <div class="kpi-strip">
+        <div class="kpi-cell accent-brand">
+          <div class="kpi-label">Total Deliveries</div>
+          <div class="kpi-value">12,847</div>
+          <div class="kpi-delta up">+8.4% vs last month</div>
+        </div>
+        <div class="kpi-cell accent-ok">
+          <div class="kpi-label">Success Rate</div>
+          <div class="kpi-value">97.3<span style="font-size:16px;font-weight:600">%</span></div>
+          <div class="kpi-delta up">+0.6pp</div>
+        </div>
+        <div class="kpi-cell accent-navy">
+          <div class="kpi-label">Active Drivers</div>
+          <div class="kpi-value mono">1,204</div>
+          <div class="kpi-delta up">+34 this week</div>
+        </div>
+        <div class="kpi-cell accent-coral">
+          <div class="kpi-label">Avg. Delivery Time</div>
+          <div class="kpi-value mono">42<span style="font-size:14px;font-weight:500">min</span></div>
+          <div class="kpi-delta down">+3min vs target</div>
+        </div>
+      </div>
+
+      <div class="sub-label" style="margin-top:32px">Progress bars</div>
+      <div style="max-width:480px">
+        <div class="progress-wrap">
+          <div class="progress-head">
+            <span class="progress-name">Bangkok zone</span>
+            <span class="progress-pct">84%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:84%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-head">
+            <span class="progress-name">Chiang Mai zone</span>
+            <span class="progress-pct">61%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill navy" style="width:61%"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-head">
+            <span class="progress-name">Phuket zone</span>
+            <span class="progress-pct">38%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill coral" style="width:38%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 9: ALERTS ── -->
+    <section class="section" id="alerts">
+      <div class="sec-eyebrow">09 / Alerts</div>
+      <h2 class="sec-title">Alert System</h2>
+      <p class="sec-desc">Left-border accent only. No icon emoji — semantic color and weight carry the meaning. Keeps the interface clean in high-density views.</p>
+
+      <div class="alert alert-info">
+        <div class="alert-icon" style="color:var(--s-info)">i</div>
+        <div>
+          <div class="alert-title">Route optimisation running</div>
+          <div class="alert-body">The system is recalculating optimal routes for the Bangkok zone. Estimated completion in 2 minutes.</div>
+        </div>
+      </div>
+      <div class="alert alert-success">
+        <div class="alert-icon" style="color:var(--s-success)">+</div>
+        <div>
+          <div class="alert-title">Batch upload complete</div>
+          <div class="alert-body">1,284 delivery tasks imported successfully. No validation errors found.</div>
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <div class="alert-icon" style="color:var(--s-warning)">!</div>
+        <div>
+          <div class="alert-title">Driver availability low</div>
+          <div class="alert-body">Only 12 drivers available in the Sukhumvit area. Consider reassigning from adjacent zones.</div>
+        </div>
+      </div>
+      <div class="alert alert-danger">
+        <div class="alert-icon" style="color:var(--s-danger)">x</div>
+        <div>
+          <div class="alert-title">API connection failed</div>
+          <div class="alert-body">Unable to reach the fleet tracking service. Last sync was 14 minutes ago. Check your network configuration.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 10: APP SHELL ── -->
+    <section class="section" id="shell">
+      <div class="sec-eyebrow">10 / Patterns</div>
+      <h2 class="sec-title">App Shell</h2>
+      <p class="sec-desc">220px fixed sidebar with cyan active state. 48px sticky topbar. Content area on bg-1 (#F8FCFD). The sidebar header uses cyan-light wash to tie the brand into navigation.</p>
+
+      <div class="shell-preview">
+        <div class="shell-topbar">
+          <div class="shell-dots">
+            <div class="shell-dot sd-r"></div>
+            <div class="shell-dot sd-y"></div>
+            <div class="shell-dot sd-g"></div>
+          </div>
+          <div class="shell-addr">app.skootar.com/dashboard</div>
+        </div>
+        <div class="shell-body">
+          <div class="shell-sb">
+            <div class="shell-sb-hd">
+              <div class="shell-sb-hd-dot"></div>
+              SK<span style="color:var(--coral)">X</span>
+            </div>
+            <div class="shell-item active"><div class="shell-item-icon"></div>Dashboard</div>
+            <div class="shell-item"><div class="shell-item-icon"></div>Deliveries</div>
+            <div class="shell-item"><div class="shell-item-icon"></div>Drivers</div>
+            <div class="shell-item"><div class="shell-item-icon"></div>Routes</div>
+            <div class="shell-item"><div class="shell-item-icon"></div>Analytics</div>
+            <div class="shell-item"><div class="shell-item-icon"></div>Settings</div>
+          </div>
+          <div class="shell-content">
+            <div class="shell-toprow">
+              <div class="shell-page-title">Overview</div>
+              <div style="display:flex;gap:6px">
+                <span class="label label-brand" style="font-size:9px;height:18px">Live</span>
+                <button class="btn btn-primary btn-sm" style="height:22px;font-size:10px">+ New task</button>
+              </div>
+            </div>
+            <div class="shell-kpi-mini">
+              <div class="skm"><div class="skm-l">Deliveries</div><div class="skm-v">1,284</div></div>
+              <div class="skm" style="border-top-color:var(--navy)"><div class="skm-l">Drivers</div><div class="skm-v">204</div></div>
+              <div class="skm" style="border-top-color:var(--coral)"><div class="skm-l">Issues</div><div class="skm-v">3</div></div>
+            </div>
+            <div class="shell-table-mock">
+              <div class="stm-row header">
+                <div class="stm-cell">Order ID</div>
+                <div class="stm-cell">Zone</div>
+                <div class="stm-cell">ETA</div>
+                <div class="stm-cell">Status</div>
+              </div>
+              <div class="stm-row">
+                <div class="stm-cell" style="font-family:var(--f-mono);font-size:9px;color:var(--t-brand)">#SKX-08241</div>
+                <div class="stm-cell">Bangkok</div>
+                <div class="stm-cell">14:32</div>
+                <div class="stm-cell"><span class="stm-badge" style="background:var(--s-success-bg);color:var(--s-success)">Done</span></div>
+              </div>
+              <div class="stm-row">
+                <div class="stm-cell" style="font-family:var(--f-mono);font-size:9px;color:var(--t-brand)">#SKX-08242</div>
+                <div class="stm-cell">Silom</div>
+                <div class="stm-cell">14:48</div>
+                <div class="stm-cell"><span class="stm-badge" style="background:var(--s-info-bg);color:var(--s-info)">Transit</span></div>
+              </div>
+              <div class="stm-row">
+                <div class="stm-cell" style="font-family:var(--f-mono);font-size:9px;color:var(--t-brand)">#SKX-08243</div>
+                <div class="stm-cell">Asok</div>
+                <div class="stm-cell">15:10</div>
+                <div class="stm-cell"><span class="stm-badge" style="background:var(--s-warning-bg);color:var(--s-warning)">Delay</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── SECTION 11: TOKEN REFERENCE ── -->
+    <section class="section" id="tokens">
+      <div class="sec-eyebrow">11 / Token Reference</div>
+      <h2 class="sec-title">CSS Variables</h2>
+      <p class="sec-desc">Complete token set. Copy-paste into your project. All values reference-safe for both web and React Native via design token pipeline.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-lang">CSS — :root tokens</div>
+          <div class="code-dots">
+            <div class="code-dot"></div>
+            <div class="code-dot"></div>
+            <div class="code-dot"></div>
+          </div>
+        </div>
+        <pre class="code"><span class="c-cmt">/* ── Surfaces ── */</span>
+<span class="c-prop">--bg-0</span>: <span class="c-str">#FFFFFF</span>;      <span class="c-cmt">/* cards, modals */</span>
+<span class="c-prop">--bg-1</span>: <span class="c-str">#F8FCFD</span>;      <span class="c-cmt">/* page base — faint cyan wash */</span>
+<span class="c-prop">--bg-2</span>: <span class="c-str">#EEF8FA</span>;      <span class="c-cmt">/* panels */</span>
+<span class="c-prop">--bg-3</span>: <span class="c-str">#DDF2F6</span>;      <span class="c-cmt">/* hover, separators */</span>
+
+<span class="c-cmt">/* ── Brand (Skootar exact) ── */</span>
+<span class="c-prop">--cyan</span>:       <span class="c-brand">#28C3E3</span>;  <span class="c-cmt">/* Primary — exact skootar.com */</span>
+<span class="c-prop">--cyan-dark</span>:  <span class="c-brand">#1CAAC8</span>;  <span class="c-cmt">/* Hover / active */</span>
+<span class="c-prop">--cyan-xdark</span>: <span class="c-brand">#147A93</span>;  <span class="c-cmt">/* Pressed */</span>
+<span class="c-prop">--cyan-light</span>: <span class="c-brand">#EBF9FC</span>;  <span class="c-cmt">/* Tint / dim bg */</span>
+<span class="c-prop">--cyan-mid</span>:   <span class="c-brand">#A8E5F3</span>;  <span class="c-cmt">/* Mid tint */</span>
+
+<span class="c-prop">--navy</span>:       <span class="c-navy">#08085E</span>;  <span class="c-cmt">/* Anchor — exact skootar.com */</span>
+<span class="c-prop">--navy-mid</span>:   <span class="c-navy">#12126E</span>;
+<span class="c-prop">--navy-soft</span>:  <span class="c-navy">#E8E8F7</span>;  <span class="c-cmt">/* Navy bg tint */</span>
+
+<span class="c-prop">--coral</span>:      <span class="c-coral">#F05A78</span>;  <span class="c-cmt">/* Accent — exact skootar.com */</span>
+<span class="c-prop">--coral-dim</span>:  <span class="c-coral">#FEF0F3</span>;
+
+<span class="c-cmt">/* ── Text ── */</span>
+<span class="c-prop">--t-primary</span>:   <span class="c-str">#0A0F14</span>;
+<span class="c-prop">--t-secondary</span>: <span class="c-str">#2E4050</span>;
+<span class="c-prop">--t-muted</span>:     <span class="c-str">#6B8090</span>;
+<span class="c-prop">--t-disabled</span>:  <span class="c-str">#92A8B5</span>;
+<span class="c-prop">--t-brand</span>:     <span class="c-brand">#1CAAC8</span>;
+<span class="c-prop">--t-navy</span>:      <span class="c-navy">#08085E</span>;
+
+<span class="c-cmt">/* ── Borders ── */</span>
+<span class="c-prop">--b-subtle</span>:  <span class="c-str">#D6EDF2</span>;
+<span class="c-prop">--b-default</span>: <span class="c-str">#B8D8E0</span>;
+<span class="c-prop">--b-strong</span>:  <span class="c-str">#8BBECB</span>;
+<span class="c-prop">--b-brand</span>:   <span class="c-brand">#28C3E3</span>;
+
+<span class="c-cmt">/* ── Semantic ── */</span>
+<span class="c-prop">--s-success</span>:    <span class="c-str">#0F7B45</span>; <span class="c-prop">--s-success-bg</span>: <span class="c-str">#D6F5E5</span>;
+<span class="c-prop">--s-warning</span>:    <span class="c-str">#8A6000</span>; <span class="c-prop">--s-warning-bg</span>: <span class="c-str">#FFF4C2</span>;
+<span class="c-prop">--s-danger</span>:     <span class="c-str">#C41E2A</span>; <span class="c-prop">--s-danger-bg</span>:  <span class="c-str">#FDECEA</span>;
+<span class="c-prop">--s-info</span>:       <span class="c-str">#0861C4</span>; <span class="c-prop">--s-info-bg</span>:    <span class="c-str">#DCF0FF</span>;
+
+<span class="c-cmt">/* ── Type ── */</span>
+<span class="c-prop">--f-ui</span>:   <span class="c-str">'Inter'</span>, -apple-system, system-ui, sans-serif;
+<span class="c-prop">--f-thai</span>: <span class="c-str">'Kanit'</span>, <span class="c-str">'Inter'</span>, sans-serif;
+<span class="c-prop">--f-mono</span>: <span class="c-str">'JetBrains Mono'</span>, <span class="c-str">'SF Mono'</span>, monospace;
+
+<span class="c-cmt">/* ── Radius ── */</span>
+<span class="c-prop">--r-2</span>: 2px;  <span class="c-prop">--r-4</span>: 4px;  <span class="c-prop">--r-6</span>: 6px;
+<span class="c-prop">--r-8</span>: 8px;  <span class="c-prop">--r-12</span>: 12px; <span class="c-prop">--r-16</span>: 16px;
+
+<span class="c-cmt">/* ── Shadows — cyan-tinted ── */</span>
+<span class="c-prop">--sh-xs</span>: 0 1px 2px rgba(8,135,160,0.06);
+<span class="c-prop">--sh-sm</span>: 0 1px 4px rgba(8,135,160,0.08), 0 1px 2px rgba(8,135,160,0.04);
+<span class="c-prop">--sh-md</span>: 0 4px 12px rgba(8,135,160,0.10), 0 1px 3px rgba(8,135,160,0.05);
+<span class="c-prop">--sh-brand</span>: 0 0 0 3px rgba(40,195,227,0.18); <span class="c-cmt">/* focus ring */</span></pre>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>
