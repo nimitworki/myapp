@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { LogoutButton } from "@/components/LogoutButton";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -18,7 +19,6 @@ export default async function DashboardPage() {
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-1)" }}>
-      {/* Topbar */}
       <nav style={{
         background: "var(--navy)", borderBottom: "1px solid var(--navy-mid)",
         padding: "0 24px", height: 52,
@@ -38,32 +38,10 @@ export default async function DashboardPage() {
           <span style={{ fontSize: 14, fontWeight: 600, color: "#fff", letterSpacing: "-0.2px" }}>myapp</span>
         </div>
 
-        <form action={logout}>
-          <button
-            type="submit"
-            style={{
-              background: "transparent", border: "1px solid rgba(255,255,255,0.15)",
-              color: "rgba(255,255,255,0.7)", fontSize: 12, fontWeight: 500,
-              padding: "5px 14px", borderRadius: "var(--r-6)", cursor: "pointer",
-              fontFamily: "inherit", transition: "all 0.12s",
-            }}
-            onMouseOver={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--coral)";
-              (e.currentTarget as HTMLButtonElement).style.color = "var(--coral)";
-            }}
-            onMouseOut={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.15)";
-              (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
-            }}
-          >
-            ออกจากระบบ
-          </button>
-        </form>
+        <LogoutButton action={logout} />
       </nav>
 
-      {/* Content */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "40px 24px" }}>
-        {/* Welcome card */}
         <div style={{
           background: "var(--bg-0)", border: "1px solid var(--b-subtle)",
           borderRadius: "var(--r-12)", padding: "28px 28px 24px",
@@ -92,24 +70,18 @@ export default async function DashboardPage() {
             display: "flex", alignItems: "center", gap: 10,
           }}>
             <span style={{ fontSize: 12, color: "var(--t-muted)", fontWeight: 500 }}>อีเมล</span>
-            <span style={{
-              width: 1, height: 12, background: "var(--b-default)", flexShrink: 0,
-            }} />
+            <span style={{ width: 1, height: 12, background: "var(--b-default)", flexShrink: 0 }} />
             <span style={{ fontSize: 13, color: "var(--t-primary)", fontWeight: 500 }}>{user.email}</span>
           </div>
         </div>
 
-        {/* Status badge */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 6,
           padding: "6px 12px", borderRadius: "var(--r-6)",
-          background: "var(--s-success-bg)", border: "1px solid #b2e5cc",
+          background: "var(--s-success-bg)", border: "1px solid var(--s-success-border)",
           fontSize: 12, color: "var(--s-success)", fontWeight: 500,
         }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: "50%",
-            background: "var(--s-success)", flexShrink: 0,
-          }} />
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--s-success)", flexShrink: 0 }} />
           Session active
         </div>
       </div>

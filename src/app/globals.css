@@ -45,8 +45,9 @@
   --b-brand:   #28C3E3;
   --b-navy:    #08085E;
 
-  --s-success:    #0F7B45;
-  --s-success-bg: #D6F5E5;
+  --s-success:        #0F7B45;
+  --s-success-bg:     #D6F5E5;
+  --s-success-border: #B2E5CC;
   --s-warning:    #8A6000;
   --s-warning-bg: #FFF4C2;
   --s-danger:     #C41E2A;
@@ -132,6 +133,24 @@ body {
   font-weight: 500;
   color: var(--t-secondary);
   margin-bottom: 5px;
+}
+
+/* SKX Ghost Light (for dark backgrounds) */
+.skx-btn-ghost-light {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: var(--r-6);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.12s, border-color 0.12s;
+}
+.skx-btn-ghost-light:hover {
+  border-color: var(--coral);
+  color: var(--coral);
 }
 
 /* SKX Alert */

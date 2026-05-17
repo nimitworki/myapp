@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { LogoMark } from "@/components/LogoMark";
+import { ErrorAlert } from "@/components/ErrorAlert";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -26,29 +28,13 @@ export default function RegisterPage() {
     }
 
     router.push("/dashboard");
-    router.refresh();
   }
 
   return (
-    <main
-      style={{ minHeight: "100vh", background: "var(--bg-1)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}
-    >
+    <main style={{ minHeight: "100vh", background: "var(--bg-1)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
       <div style={{ width: "100%", maxWidth: 400 }}>
-        {/* Logo mark */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 32, justifyContent: "center" }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: "var(--r-8)",
-            background: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="7" stroke="var(--cyan)" strokeWidth="2.5" fill="none"/>
-              <circle cx="10" cy="10" r="3" fill="var(--cyan)"/>
-            </svg>
-          </div>
-          <span style={{ fontSize: 18, fontWeight: 700, color: "var(--navy)", letterSpacing: "-0.3px" }}>myapp</span>
-        </div>
+        <LogoMark />
 
-        {/* Card */}
         <div style={{
           background: "var(--bg-0)", border: "1px solid var(--b-subtle)",
           borderRadius: "var(--r-12)", padding: "32px 28px",
@@ -83,14 +69,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            {error && (
-              <div className="skx-alert-danger">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, marginTop: 1 }}>
-                  <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3.5a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3A.75.75 0 018 4.5zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                </svg>
-                <span>{error}</span>
-              </div>
-            )}
+            {error && <ErrorAlert message={error} />}
 
             <button type="submit" disabled={loading} className="skx-btn skx-btn-primary" style={{ marginTop: 4 }}>
               {loading ? "กำลังสมัคร..." : "สมัครสมาชิก"}
