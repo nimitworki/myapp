@@ -17,30 +17,100 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-gray-900">My App</h1>
+    <main style={{ minHeight: "100vh", background: "var(--bg-1)" }}>
+      {/* Topbar */}
+      <nav style={{
+        background: "var(--navy)", borderBottom: "1px solid var(--navy-mid)",
+        padding: "0 24px", height: 52,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{
+            width: 28, height: 28, borderRadius: "var(--r-6)",
+            background: "rgba(40,195,227,0.15)", border: "1px solid rgba(40,195,227,0.3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="var(--cyan)" strokeWidth="2.5" fill="none"/>
+              <circle cx="10" cy="10" r="3" fill="var(--cyan)"/>
+            </svg>
+          </div>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "#fff", letterSpacing: "-0.2px" }}>myapp</span>
+        </div>
+
         <form action={logout}>
           <button
             type="submit"
-            className="text-sm text-gray-500 hover:text-red-600 transition-colors"
+            style={{
+              background: "transparent", border: "1px solid rgba(255,255,255,0.15)",
+              color: "rgba(255,255,255,0.7)", fontSize: 12, fontWeight: 500,
+              padding: "5px 14px", borderRadius: "var(--r-6)", cursor: "pointer",
+              fontFamily: "inherit", transition: "all 0.12s",
+            }}
+            onMouseOver={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--coral)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--coral)";
+            }}
+            onMouseOut={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.15)";
+              (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+            }}
           >
             ออกจากระบบ
           </button>
         </form>
       </nav>
 
-      <div className="max-w-2xl mx-auto px-6 py-12">
-        <div className="bg-white rounded-2xl border border-gray-200 p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-1">
-            ยินดีต้อนรับ
-          </h2>
-          <p className="text-sm text-gray-500 mb-6">เข้าสู่ระบบสำเร็จ</p>
-
-          <div className="bg-gray-50 rounded-lg px-4 py-3 text-sm text-gray-700">
-            <span className="font-medium">อีเมล: </span>
-            {user.email}
+      {/* Content */}
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "40px 24px" }}>
+        {/* Welcome card */}
+        <div style={{
+          background: "var(--bg-0)", border: "1px solid var(--b-subtle)",
+          borderRadius: "var(--r-12)", padding: "28px 28px 24px",
+          boxShadow: "var(--sh-sm)", marginBottom: 20,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+            <div style={{
+              width: 44, height: 44, borderRadius: "50%",
+              background: "var(--cyan-light)", border: "2px solid var(--cyan-mid)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: "var(--t-primary)", marginBottom: 2 }}>ยินดีต้อนรับ</h2>
+              <p style={{ fontSize: 12, color: "var(--t-muted)" }}>เข้าสู่ระบบสำเร็จ</p>
+            </div>
           </div>
+
+          <div style={{
+            background: "var(--bg-1)", border: "1px solid var(--b-subtle)",
+            borderRadius: "var(--r-8)", padding: "12px 16px",
+            display: "flex", alignItems: "center", gap: 10,
+          }}>
+            <span style={{ fontSize: 12, color: "var(--t-muted)", fontWeight: 500 }}>อีเมล</span>
+            <span style={{
+              width: 1, height: 12, background: "var(--b-default)", flexShrink: 0,
+            }} />
+            <span style={{ fontSize: 13, color: "var(--t-primary)", fontWeight: 500 }}>{user.email}</span>
+          </div>
+        </div>
+
+        {/* Status badge */}
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: 6,
+          padding: "6px 12px", borderRadius: "var(--r-6)",
+          background: "var(--s-success-bg)", border: "1px solid #b2e5cc",
+          fontSize: 12, color: "var(--s-success)", fontWeight: 500,
+        }}>
+          <span style={{
+            width: 6, height: 6, borderRadius: "50%",
+            background: "var(--s-success)", flexShrink: 0,
+          }} />
+          Session active
         </div>
       </div>
     </main>

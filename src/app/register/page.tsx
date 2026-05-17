@@ -30,62 +30,80 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">สมัครสมาชิก</h1>
-        <p className="text-sm text-gray-500 mb-8">My App</p>
-
-        <form onSubmit={handleRegister} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              อีเมล
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+    <main
+      style={{ minHeight: "100vh", background: "var(--bg-1)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}
+    >
+      <div style={{ width: "100%", maxWidth: 400 }}>
+        {/* Logo mark */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 32, justifyContent: "center" }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: "var(--r-8)",
+            background: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="var(--cyan)" strokeWidth="2.5" fill="none"/>
+              <circle cx="10" cy="10" r="3" fill="var(--cyan)"/>
+            </svg>
           </div>
+          <span style={{ fontSize: 18, fontWeight: 700, color: "var(--navy)", letterSpacing: "-0.3px" }}>myapp</span>
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              รหัสผ่าน
-            </label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="อย่างน้อย 6 ตัวอักษร"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+        {/* Card */}
+        <div style={{
+          background: "var(--bg-0)", border: "1px solid var(--b-subtle)",
+          borderRadius: "var(--r-12)", padding: "32px 28px",
+          boxShadow: "var(--sh-md)",
+        }}>
+          <h1 style={{ fontSize: 20, fontWeight: 700, color: "var(--t-primary)", marginBottom: 4 }}>สมัครสมาชิก</h1>
+          <p style={{ fontSize: 13, color: "var(--t-muted)", marginBottom: 24 }}>สร้างบัญชีใหม่</p>
 
-          {error && (
-            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5">
-              {error}
-            </p>
-          )}
+          <form onSubmit={handleRegister} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div>
+              <label className="skx-label">อีเมล</label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="skx-input"
+              />
+            </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg text-sm transition-colors"
-          >
-            {loading ? "กำลังสมัคร..." : "สมัครสมาชิก"}
-          </button>
-        </form>
+            <div>
+              <label className="skx-label">รหัสผ่าน</label>
+              <input
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="อย่างน้อย 6 ตัวอักษร"
+                className="skx-input"
+              />
+            </div>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
-          มีบัญชีแล้ว?{" "}
-          <a href="/login" className="text-blue-600 hover:underline font-medium">
-            เข้าสู่ระบบ
-          </a>
-        </p>
+            {error && (
+              <div className="skx-alert-danger">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, marginTop: 1 }}>
+                  <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3.5a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3A.75.75 0 018 4.5zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                </svg>
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button type="submit" disabled={loading} className="skx-btn skx-btn-primary" style={{ marginTop: 4 }}>
+              {loading ? "กำลังสมัคร..." : "สมัครสมาชิก"}
+            </button>
+          </form>
+
+          <p style={{ marginTop: 20, textAlign: "center", fontSize: 13, color: "var(--t-muted)" }}>
+            มีบัญชีแล้ว?{" "}
+            <a href="/login" style={{ color: "var(--cyan-dark)", fontWeight: 600, textDecoration: "none" }}>
+              เข้าสู่ระบบ
+            </a>
+          </p>
+        </div>
       </div>
     </main>
   );
